@@ -1,0 +1,31 @@
+extends layout
+
+block content
+
+  h1 ID: #{bookinstance_detail._id}
+  
+  p #[strong Book Title: ]
+   a(href=bookinstance_detail.book.url) #{bookinstance_detail.book.title}
+  p #[strong Imprint:] #{bookinstance_detail.imprint}
+
+    p #[strong Status:] 
+    if bookinstance_detail.status=='Available'
+      span.text-success #{bookinstance_detail.status}
+    else if bookinstance_detail.status=='Maintenance'
+      span.text-danger #{bookinstance_detail.status}
+    else
+      span.text-warning #{bookinstance_detail.status} 
+      
+  if bookinstance_detail.status!='Available'
+    p #[strong Due back:] #{bookinstance_detail.due_back_formatted}
+	
+  hr
+  p Do You Want to Delete this instance?
+  
+  form(method='POST' action='')
+    div.form-group
+     input#bookinstance_detail.form-control(type='hidden',name='bookinstanceid', required='true', value=bookinstance_detail._id )
+  
+     button#h1.btn.btn-primary(type='submit', value='delete', name='h1' ) Yes
+     p
+     button#h2.btn.btn-primary(type='submit', value='Nodelete', name='h2') No

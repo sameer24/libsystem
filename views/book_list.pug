@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  
+  ul(class="list-group")
+  each book in book_list
+    li(class="list-group-item") 
+      a(href=book.url) #{book.title} 
+      | (#{book.author.name})
+
+  else
+    li(class="list-group-item") There are no books.

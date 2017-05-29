@@ -1,0 +1,35 @@
+extends layout
+
+block content
+ if genre
+  h1 Genre: #{genre.name}
+  
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Books
+    
+    
+    if genre_books.length
+        dl
+        each book in genre_books
+          dt 
+             a(href=book.url) #{book.title}
+          dd #{book.summary}
+        else
+         p This genre has no books
+        hr
+        p #[Strong Please remove above book to delete Genre]
+        hr
+    else
+      hr
+      p
+       p(style='color:red') #[strong Do You Want to Delete Genre? #{genre.name}] 
+       form(method='POST' action='')
+        div.form-group
+        input#genre_delete.form-control(type='hidden', name='genreid', required='true',value=genre._id)  
+        button#h1.btn.btn-primary(type='submit', value='delete', name='h1' ) Yes
+        p
+        button#h2.btn.btn-primary(type='submit', value='Nodelete', name='h2') No
+ else
+  p #[Strong Bad Path]
+  a(href='/catalog') Visit Below link

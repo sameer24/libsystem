@@ -1,0 +1,47 @@
+extends layout
+
+append head
+  link(rel='stylesheet', href='/css/jquery.fileupload.css')
+  script(src='/js/vendor/jquery.ui.widget.js')
+  script(src='/js/load-image.all.min.js')
+  script(src='/js/canvas-to-blob.min.js')
+  script(src='/js/jquery.iframe-transport.js')
+  script(src='/js/jquery.fileupload.js')
+  script(src='/js/jquery.fileupload-process.js')
+  script(src='/js/jquery.fileupload-image.js')
+  script(src='/js/jquery.fileupload-audio.js')
+  script(src='/js/jquery.fileupload-video.js')
+  script(src='/js/jquery.fileupload-validate.js')
+  script(src='/javascripts/cust.fileUpload.js')
+  
+block content
+  h1=title
+
+
+  form#uploadForm(class='container' ref='uploadForm', action='', method='post', enctype='multipart/form-data')
+      div.form-group
+       
+       
+       label(for='book') Book:
+       select#book.form-control(type='select' placeholder='Select book' name='book' required='true')
+        for book in books
+          if bookinstance
+            option(value=book._id selected=(bookinstance.book.toString()==book._id.toString() ? 'selected' : false)) #{book.title}
+          else
+            option(value=book._id) #{book.title}
+
+      div.form-group
+       div(class='file-input file-input-new')
+        label(for='bookfrontpage') Book Front Page:
+        input(type='file', name='bookfrontpage' id='bookfrontpage'  class="file" data-show-preview="false")
+      div.form-group
+       div(class='file-input file-input-new')
+        label(for='booklastpage') Book Last Page:
+        input(type='file', name='booklastpage'  class="file" data-show-preview="false")
+      div.form-group
+       div(class='file-input file-input-new')
+        label(for='bookpdf') Book PDF: #{messages}
+        input(type='file', name='bookpdf'  class="file" data-show-preview="false")
+      |  
+      div.form-group
+       input(type='submit', value='Upload!' class='btn btn-warning')

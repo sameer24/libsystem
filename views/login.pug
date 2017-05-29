@@ -1,0 +1,29 @@
+doctype html
+html(lang='en')
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    div(class='container-fluid')
+      div(class='row')
+
+       block content
+        h1 #{title}
+  
+        form(method='POST' action='' class="form-inline")
+         div.form-group(class="form-group")
+         lable(for='username', class="sr-only") User Name :
+         input#username.form-control(type='text', placeholder='User Name' name='username' required='true' class="form-control" )
+         div.form-group(class="form-group")
+         label(for='password' ,class="sr-only") Password:
+         input#password.form-control(type='password', placeholder='password' name='password' required='true' class='form-control')
+         div.form-group(class="form-group")
+         button.btn.btn-primary(type='submit' class="btn btn-default") Submit
+         if message
+            div.form-group(class="form-group")
+            p.description= message

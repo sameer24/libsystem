@@ -1,0 +1,43 @@
+extends layout
+
+block content
+
+  h1 #{title} : #{book.title}
+  
+  p #[strong Author:] 
+    a(href=book.author.url) #{book.author.name}  
+  p #[strong Summary:] 
+    a(href=book.author.url) #{book.summary}  
+  p #[strong ISBN:] 
+    a(href=book.author.url) #{book.isbn}  
+  p #[strong Genre:] 
+    each val in book.genre
+     a(href=val.url) #{val.name}|,
+	 
+  if book_instance.length
+     div(style='margin-left:20px;margin-top:20px')
+      h4 Copies
+      p #[strong Please remove the below instance/s for removing this book]
+       each val in book_instance
+          if val.status=='Available'
+             p.text-success #{val.status} 
+          else if val.status=='Maintenance'
+             p.text-danger  #{val.status} 		
+          else 
+             p.text-warning  #{val.status} 
+             p #[strong IMPRINT] #{val.imprint}
+          if val.status=='Available'
+           p #[strong Due back:] #{val.due_back_F}
+           p #[strong Id:] 
+           a(href=val.url+'/delete') #{val._id}
+  else 
+   hr
+   p Do You Want to Delete this instance?
+  
+   form(method='POST' action='')
+    div.form-group
+     input#book.form-control(type='hidden',name='bookid', required='true', value=book._id )
+  
+     button#h1.btn.btn-primary(type='submit', value='delete', name='h1' ) Yes
+     p
+     button#h2.btn.btn-primary(type='submit', value='Nodelete', name='h2') No

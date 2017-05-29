@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  
+  ul(class="list-group")
+  each author in author_list
+    li(class="list-group-item") 
+      a(href=author.url) #{author.name} 
+      | (#{author.date_of_birth_F} - #{author.date_of_death_F})
+//-| (#{author.date_of_birth} - #{author.date_of_death})
+
+  else
+    li There are no authors.
